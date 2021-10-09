@@ -41,7 +41,12 @@ public class CityServiceImpl implements CityService {
     @Override
     @Transactional
     public City update(CityDto cityDto, Long cityId) {
-        return null;
+        final City city = cityRepository.findById(cityId).orElseThrow(IllegalArgumentException::new);
+        final City changeCity = CityMapper.INSTANCE.fromDTO(cityDto);
+        city.setNameCity(changeCity.getNameCity());
+        city.setPlaces(iteratePlaces(changeCity));
+        log.info("Update completed");
+        return cityRepository.save(city);
     }
 
     @Override

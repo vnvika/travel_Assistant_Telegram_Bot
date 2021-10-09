@@ -35,8 +35,25 @@ public class CityServiceImpl implements CityService {
             cityRepository.save(city);
             log.info("Created city {}", city);
         }
-
         return city;
+    }
+
+    @Override
+    @Transactional
+    public City update(CityDto cityDto, Long cityId) {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long cityId) {
+        if (cityRepository.findById(cityId).isPresent()) {
+            placeRepository.deleteAllByCity_Id(cityId);
+            cityRepository.deleteById(cityId);
+            log.info("Delete completed");
+        } else {
+            throw new IllegalArgumentException("City not found");
+        }
     }
 
     private Set<Place> iteratePlaces(City city) {

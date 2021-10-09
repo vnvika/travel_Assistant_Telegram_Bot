@@ -5,4 +5,5 @@ import org.vnvika.travelassistanttelegrambot.model.Place;
 
 public interface PlaceRepository extends JpaRepository<Place, Long> {
     Place findByNamePlace(String placeName);
+    void deleteAllByCity_Id(Long city_id);
 }

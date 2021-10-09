@@ -18,6 +18,7 @@ public class Place {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(mappedBy = "places", cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.REMOVE}, fetch = FetchType.LAZY)
-    private Set<City> cities;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 }

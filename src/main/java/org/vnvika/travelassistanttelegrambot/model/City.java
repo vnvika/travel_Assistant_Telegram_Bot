@@ -19,9 +19,6 @@ public class City {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "city_places",
-            joinColumns = {@JoinColumn(name = "city_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "place_id", referencedColumnName = "id")})
+    @OneToMany(mappedBy = "city")
     private Set<Place> places;
 }

@@ -1,15 +1,17 @@
 package org.vnvika.travelassistanttelegrambot.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "place")
 @Data
 public class Place {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -19,6 +21,6 @@ public class Place {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", nullable = false)
     private City city;
 }

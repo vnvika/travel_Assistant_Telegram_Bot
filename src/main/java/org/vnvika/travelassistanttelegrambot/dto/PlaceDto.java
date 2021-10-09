@@ -11,5 +11,4 @@ import java.util.Set;
 public class PlaceDto {
     @NotBlank
     private String namePlace;
-    private Set<CityDto> cities;
 }

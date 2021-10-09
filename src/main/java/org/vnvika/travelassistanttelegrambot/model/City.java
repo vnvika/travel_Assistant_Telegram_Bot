@@ -1,16 +1,20 @@
 package org.vnvika.travelassistanttelegrambot.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "city")
 @Data
+@Setter
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -21,4 +25,5 @@ public class City {
     @ToString.Exclude
     @OneToMany(mappedBy = "city")
     private Set<Place> places;
+
 }

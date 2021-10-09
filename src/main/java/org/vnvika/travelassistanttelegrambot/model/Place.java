@@ -11,7 +11,7 @@ import java.util.Set;
 public class Place {
     @Id
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "namePlace")
     private String namePlace;

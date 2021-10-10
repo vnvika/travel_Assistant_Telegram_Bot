@@ -28,11 +28,11 @@ public class CityServiceImpl implements CityService {
     public City save(CityDto cityDto) {
         final City city = CityMapper.INSTANCE.fromDTO(cityDto);
         city.setId(UUID.randomUUID().getMostSignificantBits());
-        city.setPlaces(iteratePlaces(city));
 
         City findSameCity = cityRepository.findByNameCity(city.getNameCity());
         if (findSameCity == null) {
             cityRepository.save(city);
+            city.setPlaces(iteratePlaces(city));
             log.info("Created city {}", city);
         }
         return city;
@@ -61,12 +61,13 @@ public class CityServiceImpl implements CityService {
         }
     }
 
+
     private Set<Place> iteratePlaces(City city) {
         final Set<Place> places = new HashSet<>();
         for (Place place : city.getPlaces()) {
             Place currentPlace = placeRepository.findByNamePlace(place.getNamePlace());
             if (currentPlace == null) {
-                place.setCity(cityRepository.findByNameCity(city.getNameCity()));
+                place.setCity(city);
                 currentPlace = placeRepository.save(place);
                 log.info("Saved place {}", currentPlace);
             }
